@@ -22,16 +22,6 @@ export const fetchData = () => {
     }
 }
 
-export const addBook = (data) => {
-    return async (dispatch) => {
-        const request = await axios.post('http://127.0.0.1:8000/books/', data);
-        return dispatch ({
-            type: ADD_BOOK,
-            payload: request
-        })
-    }
-}
-
 export const changeFilter = (hide) => {
     return async (dispatch) => {
         if (hide) {
@@ -72,5 +62,15 @@ export const changeFilter = (hide) => {
                 payload: fetchedData
             });
         }
+    }
+}
+
+export const addBook = (data) => {
+    return async (dispatch) => {
+        const request = await axios.post('http://127.0.0.1:8000/books/', data);
+        return dispatch ({
+            type: ADD_BOOK,
+            payload: request
+        })
     }
 }

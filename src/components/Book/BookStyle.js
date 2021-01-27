@@ -29,15 +29,10 @@ const Author = {
     margin: "0"
 }
 
-const Genre = {
-
-}
-
 export const styles = {
     BookCard,
     Title,
     Description,
     Rating,
-    Author,
-    Genre
+    Author
 }

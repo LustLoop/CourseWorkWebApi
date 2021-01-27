@@ -7,7 +7,7 @@ const Book = ({ title, description, rating, author, genre}) => (
         <p style={styles.Title}>{title}</p>
         <p style={styles.Description}>Description: {description}</p>
         <p style={styles.Author}>{author}</p>
-        <p style={styles.Genre}>Genre: {genre}</p>
+        <p>Genre: {genre}</p>
     </Card>
 )
 
