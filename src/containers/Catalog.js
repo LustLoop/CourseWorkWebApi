@@ -1,9 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {fetchData} from "../actions/app";
-import Book from "../components/Book";
+import Book from "../components/Book/Book";
 import {useEffect} from 'react'
 
-export default function Feed() {
+export default function Catalog() {
     const books = useSelector(state => state.bookReducer.books);
 
     const dispatch = useDispatch();

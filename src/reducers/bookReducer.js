@@ -7,7 +7,6 @@ const initialState = {
 const bookReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_BOOKS:
-            console.log("shit " + action)
             return {
                 ...state,
                 books: action.payload
@@ -18,7 +17,8 @@ const bookReducer = (state = initialState, action) => {
                 {
                     id: action.id,
                     description: action.description,
-                    available: false
+                    rating: action.rating,
+                    available: true
                 }
             ]
         default:

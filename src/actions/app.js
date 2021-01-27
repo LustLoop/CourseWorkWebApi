@@ -5,7 +5,15 @@ export const fetchData = () => {
     return async (dispatch) => {
         const request = await axios.get('http://127.0.0.1:8000/books/');
         const fetchedData = request.data.map(book => {
-            return {id: book._id, title: book.title}
+            return {
+                id: book._id,
+                title: book.title,
+                description: book.description,
+                rating: book.rating,
+                author: book.author.name,
+                genre: book.genre.title,
+                available: book.available
+            }
         })
         return dispatch ({
             type: FETCH_BOOKS,
