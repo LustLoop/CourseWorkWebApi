@@ -1,17 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import App from './components/App'
-import rootReducer from './reducers'
+import ReactDom from 'react-dom'
+import { Provider } from 'react-redux';
+import * as configureStore from './store';
+import Feed from "./containers/Feed";
 
-const store = createStore(rootReducer)
 
-ReactDOM.render(
+const store = configureStore.STORE;
+
+ReactDom.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>,
+        <Feed />
     </Provider>,
   document.getElementById('root')
 );
