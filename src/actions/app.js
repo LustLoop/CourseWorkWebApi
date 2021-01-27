@@ -1,6 +1,5 @@
 import axios from "axios";
 import {ADD_BOOK, FETCH_BOOKS} from "../constants/actionTypes";
-import {SHOW_ALL, SHOW_AVAILABLE} from "../constants/filterTypes";
 
 export const fetchData = () => {
     return async (dispatch) => {
