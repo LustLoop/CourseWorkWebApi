@@ -1,12 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
-import {changeFilter, fetchData} from "../actions/app";
-import Book from "../components/Book/Book";
+import {showAvailable, fetchData, ignoreAvailability} from "../../actions/app";
+import Book from "../../components/Book/Book";
 import {useEffect} from 'react'
 import {Switch} from "antd";
 import 'antd/dist/antd.css';
 
 export default function Catalog() {
-    let books = useSelector(state => state.bookReducer.books);
+    let filteredBooks = useSelector(state => state.bookReducer.filteredBooks);
 
     const dispatch = useDispatch();
 
@@ -14,9 +14,13 @@ export default function Catalog() {
         dispatch(fetchData());
     }, [dispatch])
 
-    function onChange(checked) {
-        dispatch(changeFilter(checked))
-        console.log(books)
+    function filterByAvailability(checked) {
+        if(checked)
+        {
+            dispatch(showAvailable())
+        } else {
+            dispatch(ignoreAvailability())
+        }
     }
 
     const ToggleBoxStyle = {
@@ -27,18 +31,18 @@ export default function Catalog() {
         borderRadius: "20px"
     }
 
-    if (books === undefined) {
-        return <div>We don't have any books right now</div>
+    if (filteredBooks === undefined) {
+        return <div>We don't have any books like this right now</div>
     }
 
     return (
         <div>
             <div style={ToggleBoxStyle}>
-                <Switch onChange={onChange} />
+                <Switch onChange={filterByAvailability} />
                 Show only available books
             </div>
 
-            {books.map(book => <Book key={book.id} {...book} />)}
+            {filteredBooks.map(book => <Book key={book.id} {...book} />)}
         </div>
     )
 }

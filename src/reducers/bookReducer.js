@@ -1,7 +1,8 @@
-import {ADD_BOOK, FETCH_BOOKS} from "../constants/actionTypes";
+import {ADD_BOOK, FETCH_BOOKS, IGNORE_AVAILABILITY, SHOW_AVAILABLE} from "../containers/Catalog/Types";
 
 const initialState = {
-    books: []
+    books: [],
+    filteredBooks: []
 }
 
 const bookReducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const bookReducer = (state = initialState, action) => {
         case FETCH_BOOKS:
             return {
                 ...state,
-                books: action.payload
+                books: action.payload,
+                filteredBooks: action.payload
             }
         case ADD_BOOK:
             return [
@@ -21,6 +23,16 @@ const bookReducer = (state = initialState, action) => {
                     available: action.available
                 }
             ]
+        case SHOW_AVAILABLE:
+            return {
+                ...state,
+                filteredBooks: state.books.filter(book => book.available)
+            }
+        case IGNORE_AVAILABILITY:
+            return {
+                ...state,
+                filteredBooks: state.books
+            }
         default:
             return state
     }

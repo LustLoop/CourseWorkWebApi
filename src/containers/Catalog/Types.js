@@ -1,0 +1,4 @@
+export const FETCH_BOOKS = 'FETCH_BOOKS';
+export const ADD_BOOK = 'ADD_BOOK';
+export const SHOW_AVAILABLE = 'SHOW_AVAILABLE';
+export const IGNORE_AVAILABILITY = 'IGNORE_AVAILABILITY';
