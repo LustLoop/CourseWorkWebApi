@@ -1,29 +1,55 @@
 import {useDispatch, useSelector} from "react-redux";
-import {showAvailable, fetchData, ignoreAvailability} from "../../actions/app";
+import {fetchData, showFiltered, changePage, changeFilters} from "../../actions/app";
 import Book from "../../components/Book/Book";
 import {useEffect} from 'react'
-import {Switch} from "antd";
+import {Button, Pagination, Switch} from "antd";
 import 'antd/dist/antd.css';
+import Checkbox from "antd/es/checkbox/Checkbox";
 
 export default function Catalog() {
-    let filteredBooks = useSelector(state => state.bookReducer.filteredBooks);
+    const books = useSelector(state => state.bookReducer.books);
+    const genres = useSelector(state => state.bookReducer.genres);
+    const page = useSelector(state => state.bookReducer.page);
+    const filters = useSelector(state => state.bookReducer.filters);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchData());
+        dispatch(fetchData(1));
     }, [dispatch])
 
-    function filterByAvailability(checked) {
-        if(checked)
+    function filter() {
+        dispatch(changePage(1))
+        dispatch(showFiltered(page, filters.available, filters.genres))
+    }
+
+    function changeFilterOfAvailability(checked) {
+        const newFilters = filters;
+        newFilters.available = checked;
+        dispatch(changeFilters(newFilters))
+    }
+
+    function addGenreToFilter(genre) {
+        const newFilters = filters;
+        if(genre.target.checked)
         {
-            dispatch(showAvailable())
+            newFilters.genres.push(genre.target.id)
         } else {
-            dispatch(ignoreAvailability())
+            const index = newFilters.genres.indexOf(genre.target.id);
+            if (index !== -1) {
+                newFilters.genres.splice(index, 1);
+            }
         }
+        dispatch(changeFilters(newFilters))
+    }
+
+    function switchPage(page) {
+        dispatch(changePage(page));
+        dispatch(showFiltered(page, filters.available, filters.genres));
     }
 
     const ToggleBoxStyle = {
+        textAlign: "center",
         width: "20%",
         margin: "1rem auto",
         padding: "1rem 0",
@@ -31,18 +57,28 @@ export default function Catalog() {
         borderRadius: "20px"
     }
 
-    if (filteredBooks === undefined) {
+    const PaginationStyle = {
+        textAlign: "center",
+        padding: "1rem auto",
+    }
+
+    if (books === undefined) {
         return <div>We don't have any books like this right now</div>
     }
 
     return (
         <div>
             <div style={ToggleBoxStyle}>
-                <Switch onChange={filterByAvailability} />
+                <Switch onChange={changeFilterOfAvailability} />
                 Show only available books
+                <br/>
+                {genres.map(genre => <Checkbox key={genre.id} {...genre} onChange={addGenreToFilter}>{genre.title}</Checkbox>)}
+                <br/>
+                <Button onClick={filter}>Get</Button>
+                <br/>
             </div>
-
-            {filteredBooks.map(book => <Book key={book.id} {...book} />)}
+            {books.map(book => <Book key={book.id} {...book} />)}
+            <Pagination style={PaginationStyle} total={50} defaultCurrent={1} onChange={switchPage}/>
         </div>
     )
 }

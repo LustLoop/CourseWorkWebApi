@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDom from 'react-dom'
 import { Provider } from 'react-redux';
 import * as configureStore from './store';
-import Catalog from "./containers/Catalog/Catalog";
 import './index.css';
+import App from "./App";
 
 const store = configureStore.STORE;
 
 ReactDom.render(
     <Provider store={store}>
-        <Catalog />
+        <App />
     </Provider>,
   document.getElementById('root')
 );

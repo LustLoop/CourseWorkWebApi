@@ -1,4 +1,5 @@
 export const FETCH_BOOKS = 'FETCH_BOOKS';
 export const ADD_BOOK = 'ADD_BOOK';
-export const SHOW_AVAILABLE = 'SHOW_AVAILABLE';
-export const IGNORE_AVAILABILITY = 'IGNORE_AVAILABILITY';
+export const FILTER_BOOKS = 'FILTER_BOOKS';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
+export const CHANGE_FILTERS = 'CHANGE_FILTERS';
