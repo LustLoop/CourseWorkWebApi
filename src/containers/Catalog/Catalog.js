@@ -59,7 +59,6 @@ export default function Catalog() {
 
     const PaginationStyle = {
         textAlign: "center",
-        margin: "1rem auto",
         padding: "1rem auto",
     }
 
