@@ -11,7 +11,7 @@ export const fetchData = (id) => {
                 description: book.description,
                 rating: book.rating,
                 author: book.author.name,
-                genre: book.genre.title,
+                genres: book.genres,
                 available: book.available
             }
         })
@@ -44,7 +44,7 @@ export const showFiltered = (id, available, genres) => {
                 description: book.description,
                 rating: book.rating,
                 author: book.author.name,
-                genre: book.genre.title,
+                genres: book.genres,
                 available: book.available
             }
         })

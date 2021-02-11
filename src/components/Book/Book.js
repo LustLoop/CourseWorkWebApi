@@ -8,7 +8,7 @@ export default function Book (props) {
                 <p style={styles.Title}>{props.title}</p>
                 <p style={styles.Description}>Description: {props.description}</p>
                 <p style={styles.Author}>{props.author}</p>
-                <p>Genre: {props.genre}</p>
+                <p>Genre: {props.genres.map(genre => genre.title + " ")}</p>
             </Card>
         )
 }
