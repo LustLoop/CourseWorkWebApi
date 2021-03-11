@@ -3,7 +3,7 @@ import {Card} from "antd";
 
 export default function Book (props) {
         return (
-            <Card style={styles.BookCard}>
+            <Card style={props.isPhone ? styles.BookCardPhone : styles.BookCard}>
                 <p style={styles.Rating}>Rating: {props.rating}/10</p>
                 <p style={styles.Title}>{props.title} {props.available ? "" : " (out of stock)"}</p>
                 <p style={styles.Description}>Description: {props.description}</p>

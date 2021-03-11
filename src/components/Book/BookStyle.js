@@ -29,7 +29,17 @@ const Author = {
     margin: "0"
 }
 
+const BookCardPhone = {
+    width: "80%",
+    height: "auto",
+    margin: "3rem auto",
+    padding: "1rem 3rem",
+    background: "#6288cf",
+    borderRadius: "20px"
+}
+
 export const styles = {
+    BookCardPhone,
     BookCard,
     Title,
     Description,

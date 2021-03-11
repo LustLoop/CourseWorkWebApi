@@ -48,9 +48,18 @@ export default function Catalog() {
         dispatch(showFiltered(page, filters.available, filters.genres));
     }
 
-    const ToggleBoxStyle = {
+    const ToggleBoxDefaultStyle = {
         textAlign: "center",
         width: "20%",
+        margin: "1rem auto",
+        padding: "1rem 0",
+        backgroundColor: "#6288cf",
+        borderRadius: "20px"
+    }
+
+    const ToggleBoxPhoneStyle = {
+        textAlign: "center",
+        width: "80%",
         margin: "1rem auto",
         padding: "1rem 0",
         backgroundColor: "#6288cf",
@@ -68,7 +77,7 @@ export default function Catalog() {
 
     return (
         <div>
-            <div style={ToggleBoxStyle}>
+            <div style={window.innerWidth < 500 ? ToggleBoxPhoneStyle : ToggleBoxDefaultStyle}>
                 <Switch onChange={changeFilterOfAvailability} />
                 Show only available books
                 <br/>
@@ -77,7 +86,7 @@ export default function Catalog() {
                 <Button onClick={filter}>Get</Button>
                 <br/>
             </div>
-            {books.map(book => <Book key={book.id} {...book} />)}
+            {books.map(book => <Book key={book.id} {...book} isPhone={window.innerWidth < 500}/>)}
             <Pagination style={PaginationStyle} total={50} defaultCurrent={1} onChange={switchPage}/>
         </div>
     )
